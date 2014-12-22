@@ -1,3 +1,7 @@
+game_project_game:
+    resource: "@GameProjectGameBundle/Resources/config/routing.yml"
+    prefix:   /
+
 app:
     resource: @AppBundle/Controller/
     type:     annotation
