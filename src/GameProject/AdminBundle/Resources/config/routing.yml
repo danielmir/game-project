@@ -1,0 +1,15 @@
+admin_game_index:
+    path:     /games
+    defaults: { _controller: GameProjectAdminBundle:Game:index }
+
+admin_add_game_view:
+    path:     /games/add
+    defaults: { _controller: GameProjectAdminBundle:Game:add }
+
+admin_category_index:
+    path:     /categories
+    defaults: { _controller: GameProjectAdminBundle:Category:index }
+
+admin_subdomain_index:
+    path:     /subdomains
+    defaults: { _controller: GameProjectAdminBundle:Subdomain:index }

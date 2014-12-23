@@ -1,3 +1,0 @@
-game_project_game_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: GameProjectGameBundle:Default:index }

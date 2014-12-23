@@ -1,5 +1,5 @@
-game_project_game:
-    resource: "@GameProjectGameBundle/Resources/config/routing.yml"
+game_project_admin:
+    resource: "@GameProjectAdminBundle/Resources/config/routing.yml"
     prefix:   /
 
 app:

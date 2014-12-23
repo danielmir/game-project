@@ -1,0 +1,15 @@
+{% extends '::base.html.twig' %}
+
+{% block sidebar %}
+    <ul class="nav nav-pills nav-stacked">
+        <li role="presentation" {{ (page is defined and page == 'games') ? 'class="active"' : '' }}>
+            <a href="{{ path('admin_game_index') }}">Games</a>
+        </li>
+        <li role="presentation" {{ (page is defined and page == 'categories') ? 'class="active"' : '' }}>
+            <a href="{{ path('admin_category_index') }}">Categories</a>
+        </li>
+        <li role="presentation" {{ (page is defined and page == 'subdomains') ? 'class="active"' : '' }}>
+            <a href="{{ path('admin_subdomain_index') }}">Subdomains</a>
+        </li>
+    </ul>
+{% endblock %}
