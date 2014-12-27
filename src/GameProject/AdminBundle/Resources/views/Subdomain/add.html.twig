@@ -1,0 +1,16 @@
+{% set page = 'subdomains' %}
+{% extends 'GameProjectAdminBundle::layout.html.twig' %}
+
+{% block mainBlock %}
+    <div class="page-header">
+        <h1>Add subdomain</h1>
+    </div>
+    <div class="page-content">
+        <div class="row">
+            <div class="col-md-6">
+                {% form_theme form 'form/fields.html.twig' %}
+                {{ form(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

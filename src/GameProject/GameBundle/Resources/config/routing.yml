@@ -1,0 +1,40 @@
+admin_game_index:
+    path:     /admin/games
+    defaults: { _controller: GameProjectGameBundle:Game:adminIndex }
+
+admin_add_game_view:
+    path:     /admin/games/add
+    defaults: { _controller: GameProjectGameBundle:Game:add }
+
+admin_update_game_view:
+    path:     /admin/games/{id}/update
+    defaults: { _controller: GameProjectGameBundle:Game:update, id: id }
+
+admin_delete_game:
+    path:     /admin/games/{id}/delete
+    defaults: { _controller: GameProjectGameBundle:Game:delete, id: id }
+
+admin_toggle_active_game:
+    path:     /admin/games/{id}/toggleActive
+    defaults: { _controller: GameProjectGameBundle:Game:toggleActive, id: id }
+
+admin_category_index:
+    path:     /admin/categories
+    defaults: { _controller: GameProjectGameBundle:Category:adminIndex }
+
+admin_add_category_view:
+    path:     /admin/categories/add
+    defaults: { _controller: GameProjectGameBundle:Category:add }
+
+admin_update_category_view:
+    path:     /admin/categories/{id}/update
+    defaults: { _controller: GameProjectGameBundle:Category:update, id: id }
+
+admin_delete_category:
+    path:     /admin/categories/{id}/delete
+    defaults: { _controller: GameProjectGameBundle:Category:delete, id: id }
+
+admin_toggle_active_category:
+    path:     /admin/categories/{id}/toggleActive
+    defaults: { _controller: GameProjectGameBundle:Category:toggleActive, id: id }
+

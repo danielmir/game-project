@@ -1,15 +1,19 @@
-admin_game_index:
-    path:     /games
-    defaults: { _controller: GameProjectAdminBundle:Game:index }
-
-admin_add_game_view:
-    path:     /games/add
-    defaults: { _controller: GameProjectAdminBundle:Game:add }
-
-admin_category_index:
-    path:     /categories
-    defaults: { _controller: GameProjectAdminBundle:Category:index }
-
 admin_subdomain_index:
-    path:     /subdomains
-    defaults: { _controller: GameProjectAdminBundle:Subdomain:index }
+    path:     /admin/subdomains
+    defaults: { _controller: GameProjectAdminBundle:Subdomain:adminIndex }
+    
+admin_add_subdomain_view:
+    path:     /admin/subdomains/add
+    defaults: { _controller: GameProjectAdminBundle:Subdomain:add }
+
+admin_update_subdomain_view:
+    path:     /admin/subdomains/{id}/update
+    defaults: { _controller: GameProjectAdminBundle:Subdomain:update, id: id }
+
+admin_delete_subdomain:
+    path:     /admin/subdomains/{id}/delete
+    defaults: { _controller: GameProjectAdminBundle:Subdomain:delete, id: id }
+
+admin_toggle_active_subdomain:
+    path:     /admin/subdomains/{id}/toggleActive
+    defaults: { _controller: GameProjectAdminBundle:Subdomain:toggleActive, id: id }

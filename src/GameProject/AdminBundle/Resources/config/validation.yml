@@ -1,0 +1,6 @@
+GameProject\AdminBundle\Entity\Subdomain:
+    properties:
+        name:
+            - NotBlank: ~
+        abbreviation:
+            - NotBlank: ~

@@ -1,0 +1,22 @@
+{% block form_row %}
+    {% spaceless %}
+        <div class="form-group">
+            {{ form_label(form) }}
+            {% block form_errors %}
+                {% spaceless %}
+                    {% if errors|length > 0 %}
+                        <div class="alert alert-danger" style="padding: 5px">
+                            <ul>
+                                {% for error in errors %}
+                                    <li>{{ error.message }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                {% endspaceless %}
+            {% endblock form_errors %}
+            {{ form_widget(form) }}
+        </div>
+    {% endspaceless %}
+{% endblock form_row %}
+

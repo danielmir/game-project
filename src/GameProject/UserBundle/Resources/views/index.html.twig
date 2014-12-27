@@ -1,0 +1,28 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/login.css') }}"
+{% endblock %}
+
+{% block body %}
+    <div class="panel panel-default">
+        <div class="panel-body">
+            {% if error %}
+                <div class="alert alert-danger">{{ error.message }}</div>
+            {% endif %}
+
+            <form action="{{ path('login_check') }}" method="post">
+
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                <label for="username">Username:</label>
+                <input type="text" class="form-control" id="username" name="_username" value="{{ (last_username is defined) ? last_username : '' }}" />
+                <br>
+                <label for="password">Password:</label>
+                <input type="password" class="form-control" id="password" name="_password" />
+                <br>
+                <input type="submit" class="btn btn-primary btn-block" name="login" value="Login" />
+            </form>
+        </div>
+    </div>
+{% endblock %}

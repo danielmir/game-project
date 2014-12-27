@@ -1,0 +1,15 @@
+GameProject\GameBundle\Entity\Game:
+    properties:
+        name:
+            - NotBlank: ~
+        description:
+            - NotBlank: ~
+            - Length:
+                min: 50
+        link:
+            - NotBlank: ~
+
+GameProject\GameBundle\Entity\Category:
+    properties:
+        name:
+            - NotBlank: ~
