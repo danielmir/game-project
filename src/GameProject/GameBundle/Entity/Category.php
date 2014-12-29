@@ -20,7 +20,7 @@ class Category
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="GameProject\AdminBundle\Entity\Subdomain", inversedBy="games")
+     * @ORM\ManyToOne(targetEntity="GameProject\AdminBundle\Entity\Subdomain", inversedBy="categories")
      * @ORM\JoinColumn(name="subdomain_id", referencedColumnName="id")
      */
     protected $subdomain;

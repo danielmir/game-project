@@ -5,7 +5,7 @@ namespace GameProject\GameBundle\Controller;
 
 use GameProject\GameBundle\Entity\Game;
 use GameProject\GameBundle\Form\GameType;
-use Proxies\__CG__\GameProject\AdminBundle\Entity\Subdomain;
+//use Proxies\__CG__\GameProject\AdminBundle\Entity\Subdomain;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -40,12 +40,12 @@ class GameController extends Controller
 
         if ($form->isValid()) {
             $linkPost = $form->get('link')->getData();
-            $subdomainPost = $form->get('subdomain')->getData();
+            $subdomainPost = $form->get('subdomain')->getViewData();
             $link = '';
 
             if ($subdomainPost && $subdomainPost > 0) {
                 //If there is subdomains in database and got from form, get subdomain by id
-                $subdomain = $this->getDoctrine()->getRepository('GameProjectAdminBundle:subdomain')->find($subdomainPost);
+                $subdomain = $this->getDoctrine()->getRepository('GameProjectAdminBundle:Subdomain')->find($subdomainPost);
 
                 //Appending abbreviation from choosed subdomain to link
                 $link = $subdomain->getAbbreviation() . '.' . $linkPost;
