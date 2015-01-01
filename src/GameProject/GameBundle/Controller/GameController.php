@@ -165,7 +165,7 @@ class GameController extends Controller
             $em->persist($game);
             $em->flush();
 
-            $gameContent->setLinkDisplay($eng_subdomain->getName() . '.' . $form->get('link')->getData());
+            $gameContent->setLinkDisplay($eng_subdomain->getAbbreviation() . '.' . $form->get('link')->getData());
             $gameContent->setSubdomain($eng_subdomain);
             $gameContent->setGame($game);
             $em->persist($gameContent);

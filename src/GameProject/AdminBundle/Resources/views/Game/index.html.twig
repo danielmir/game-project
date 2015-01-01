@@ -25,7 +25,17 @@
             <div class="game-block">
                 <div class="row">
                     <div class="col-sm-10">
-                        <h3>{{ game.displayName }}</small></h3>
+                        <h3>{{ game.displayName }}</h3>
+                        {% set counter = 1 %}
+                        {% set gameContentLength = game.getGameContents|length %}
+                        <p class="links">Links:
+                        {% for gameContent in game.getGameContents %}
+                            {% set content = (gameContent.isActive) ? gameContent.linkDisplay : '<span style="color:red">'~gameContent.linkDisplay~'</span>' %}
+                            {{ content|raw }}
+                            {{ (counter >= gameContentLength) ? '' : ',' }}
+                            {% set counter = counter + 1 %}
+                        {% endfor %}
+                        </p>
                     </div>
                     <div class="col-sm-2">
                         <a href="{{ path('admin_update_game_view', {id: game.id}) }}" type="button" class="btn btn-primary btn-block">Edit</a>
