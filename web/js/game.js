@@ -23,6 +23,8 @@ $(document).ready(function () {
         $.post(url, formData, function (response) {
             if (response.success) {
                 $('.alert-success').fadeIn().delay(2000).fadeOut().text(response.message);
+            } else {
+                $('.alert-danger').fadeIn().delay(2000).fadeOut().text(response.message);
             }
         });
     });

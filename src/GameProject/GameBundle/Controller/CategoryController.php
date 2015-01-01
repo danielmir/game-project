@@ -68,13 +68,24 @@ class CategoryController extends Controller
                 'category_id' => $category_id
             ]);
         }
+        return $this->createNotFoundException('No page found');
     }
 
     public function saveFormAction(Request $request)
     {
         if ($request->isXmlHttpRequest()) {
+            $response = new JsonResponse();
+
             $em = $this->getDoctrine()->getEntityManager();
             $categoryContentPost = $this->get('request')->request->get('categoryContent');
+
+            if ($categoryContentPost['name'] == '') {
+                return $response->setData(array(
+                    'success' => 0,
+                    'error' => 1,
+                    'message' => 'Name field is required'
+                ));
+            }
 
             //Find category content if exists
             $repository = $this->getDoctrine()
@@ -111,7 +122,6 @@ class CategoryController extends Controller
             $em->persist($categoryContent);
             $em->flush();
 
-            $response = new JsonResponse();
             return $response->setData(array(
                 'success' => 1,
                 'error' => 0,
@@ -119,6 +129,7 @@ class CategoryController extends Controller
             ));
 
         }
+        return $this->createNotFoundException('No page found');
     }
 
     public function addAction(Request $request)
@@ -148,7 +159,6 @@ class CategoryController extends Controller
                 'The category was created!'
             );
 
-            //return $this->redirect($this->generateUrl('admin_category_index'));
             return $this->redirect($this->generateUrl('admin_update_category_view', ['id' => $category->getId()]));
         }
 
