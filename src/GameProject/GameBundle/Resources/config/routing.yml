@@ -6,17 +6,19 @@ admin_add_game_view:
     path:     /admin/games/add
     defaults: { _controller: GameProjectGameBundle:Game:add }
 
+admin_game_get_form:
+    path:     /admin/games/form/{subdomain_id}/{game_id}/get
+    defaults: { _controller: GameProjectGameBundle:Game:getForm, subdomain_id: subdomain_id, game_id: game_id }
+
+admin_game_save_form:
+    path:     /admin/games/form/save
+    defaults: { _controller: GameProjectGameBundle:Game:saveForm }
+
 admin_update_game_view:
     path:     /admin/games/{id}/update
     defaults: { _controller: GameProjectGameBundle:Game:update, id: id }
 
-admin_delete_game:
-    path:     /admin/games/{id}/delete
-    defaults: { _controller: GameProjectGameBundle:Game:delete, id: id }
-
-admin_toggle_active_game:
-    path:     /admin/games/{id}/toggleActive
-    defaults: { _controller: GameProjectGameBundle:Game:toggleActive, id: id }
+#===============================================================================
 
 admin_category_index:
     path:     /admin/categories
@@ -26,15 +28,16 @@ admin_add_category_view:
     path:     /admin/categories/add
     defaults: { _controller: GameProjectGameBundle:Category:add }
 
+admin_category_get_form:
+    path:     /admin/categories/form/{subdomain_id}/{category_id}/get
+    defaults: { _controller: GameProjectGameBundle:Category:getForm, subdomain_id: subdomain_id, category_id: category_id }
+
+admin_category_save_form:
+    path:     /admin/categories/form/save
+    defaults: { _controller: GameProjectGameBundle:Category:saveForm }
+
 admin_update_category_view:
     path:     /admin/categories/{id}/update
     defaults: { _controller: GameProjectGameBundle:Category:update, id: id }
 
-admin_delete_category:
-    path:     /admin/categories/{id}/delete
-    defaults: { _controller: GameProjectGameBundle:Category:delete, id: id }
-
-admin_toggle_active_category:
-    path:     /admin/categories/{id}/toggleActive
-    defaults: { _controller: GameProjectGameBundle:Category:toggleActive, id: id }
 

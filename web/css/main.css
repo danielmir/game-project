@@ -50,6 +50,11 @@ body {
     left: 50%;
     margin-left: -125px;
     text-align: center;
+    z-index: 100000;
+}
+.alert-success {
+    background-color: #61c66d !important;
+    color: #fff;
 }
 
 .off {
@@ -64,4 +69,14 @@ body {
 
 .alert-static {
     margin-top: 15px;
+}
+
+input[type=radio], input[type=checkbox] {
+    position: relative;
+    top: 2px;
+    margin-left: 5px;
+}
+
+.translations {
+    margin-bottom: 10px;
 }

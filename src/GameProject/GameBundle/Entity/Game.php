@@ -20,45 +20,21 @@ class Game
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="GameProject\AdminBundle\Entity\Subdomain", inversedBy="games")
-     * @ORM\JoinColumn(name="subdomain_id", referencedColumnName="id")
-     */
-    protected $subdomain;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="Category", inversedBy="games")
-     */
-    protected $categories;
-
-    /**
      * @ORM\Column(type="string", length=100)
      */
-    protected $name;
+    protected $displayName;
 
     /**
-     * @ORM\Column(type="text")
-     */
-    protected $description;
-
-    /**
-     * @ORM\Column(type="string", length=100)
-     */
-    protected $link;
-
-    /**
-     * @ORM\Column(type="string", length=100)
-     */
-    protected $linkDisplay;
-
-    /**
-     * @ORM\Column(name="is_active", type="boolean")
-     */
-    protected $isActive;
+     * @ORM\OneToMany(targetEntity="GameContent", mappedBy="game")
+     **/
+    protected $game_contents;
 
     public function __construct()
     {
-        $this->categories = new ArrayCollection();
+        $this->game_contents = new ArrayCollection();
     }
+
+
 
     /**
      * Get id
@@ -71,173 +47,58 @@ class Game
     }
 
     /**
-     * Set name
+     * Set displayName
      *
-     * @param string $name
+     * @param string $displayName
      * @return Game
      */
-    public function setName($name)
+    public function setDisplayName($displayName)
     {
-        $this->name = $name;
+        $this->displayName = $displayName;
 
         return $this;
     }
 
     /**
-     * Get name
+     * Get displayName
      *
      * @return string 
      */
-    public function getName()
+    public function getDisplayName()
     {
-        return $this->name;
+        return $this->displayName;
     }
 
     /**
-     * Set description
+     * Add game_contents
      *
-     * @param string $description
+     * @param GameContent $gameContents
      * @return Game
      */
-    public function setDescription($description)
+    public function addGameContent(GameContent $gameContents)
     {
-        $this->description = $description;
+        $this->game_contents[] = $gameContents;
 
         return $this;
     }
 
     /**
-     * Get description
+     * Remove game_contents
      *
-     * @return string 
+     * @param GameContent $gameContents
      */
-    public function getDescription()
+    public function removeGameContent(GameContent $gameContents)
     {
-        return $this->description;
+        $this->game_contents->removeElement($gameContents);
     }
 
     /**
-     * Set link
-     *
-     * @param string $link
-     * @return Game
-     */
-    public function setLink($link)
-    {
-        $this->link = $link;
-
-        return $this;
-    }
-
-    /**
-     * Get link
-     *
-     * @return string 
-     */
-    public function getLink()
-    {
-        return $this->link;
-    }
-
-    /**
-     * Set isActive
-     *
-     * @param boolean $isActive
-     * @return Game
-     */
-    public function setIsActive($isActive)
-    {
-        $this->isActive = $isActive;
-
-        return $this;
-    }
-
-    /**
-     * Get isActive
-     *
-     * @return boolean 
-     */
-    public function getIsActive()
-    {
-        return $this->isActive;
-    }
-
-    /**
-     * Set subdomain
-     *
-     * @param \GameProject\AdminBundle\Entity\Subdomain $subdomain
-     * @return Game
-     */
-    public function setSubdomain(\GameProject\AdminBundle\Entity\Subdomain $subdomain = null)
-    {
-        $this->subdomain = $subdomain;
-
-        return $this;
-    }
-
-    /**
-     * Get subdomain
-     *
-     * @return \GameProject\AdminBundle\Entity\Subdomain
-     */
-    public function getSubdomain()
-    {
-        return $this->subdomain;
-    }
-
-    /**
-     * Add categories
-     *
-     * @param \GameProject\GameBundle\Entity\Category $categories
-     * @return Game
-     */
-    public function addCategory(\GameProject\GameBundle\Entity\Category $categories)
-    {
-        $this->categories[] = $categories;
-
-        return $this;
-    }
-
-    /**
-     * Remove categories
-     *
-     * @param \GameProject\GameBundle\Entity\Category $categories
-     */
-    public function removeCategory(\GameProject\GameBundle\Entity\Category $categories)
-    {
-        $this->categories->removeElement($categories);
-    }
-
-    /**
-     * Get categories
+     * Get game_contents
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getCategories()
+    public function getGameContents()
     {
-        return $this->categories;
-    }
-
-    /**
-     * Set linkDisplay
-     *
-     * @param string $linkDisplay
-     * @return Game
-     */
-    public function setLinkDisplay($linkDisplay)
-    {
-        $this->linkDisplay = $linkDisplay;
-
-        return $this;
-    }
-
-    /**
-     * Get linkDisplay
-     *
-     * @return string 
-     */
-    public function getLinkDisplay()
-    {
-        return $this->linkDisplay;
+        return $this->game_contents;
     }
 }

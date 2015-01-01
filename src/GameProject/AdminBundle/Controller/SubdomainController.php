@@ -22,7 +22,7 @@ class SubdomainController extends Controller
         $pagination = $paginator->paginate(
             $query,
             $request->query->get('page', 1),
-            3
+            5
         );
 
         return $this->render('GameProjectAdminBundle:Subdomain:index.html.twig', [

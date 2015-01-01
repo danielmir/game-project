@@ -1,34 +1,47 @@
 {% set page = 'games' %}
 {% extends 'GameProjectAdminBundle::layout.html.twig' %}
 
+{% block javascripts %}
+    <script src="{{ asset('js/game.js') }}"></script>
+{% endblock %}
+
 {% block mainBlock %}
     <div class="page-header">
         <h1>Update game</h1>
     </div>
     <div class="page-content">
+        <div class="alert alert-success info-block info-block-success"></div>
+        <div class="alert alert-danger info-block info-block-error"></div>
+        <div class="row translations">
+            {% set counter = 0 %}
+            {% for subdomain in subdomains %}
+                {# properly formatting bootstrap rows with columns #}
+                {{ ((counter % 4) == 0 and counter != 0) ? '</div><div class="row">' : '' }}
+
+                <div class="col-md-3">
+                    <button class="game-subdomain btn btn-{{ (subdomain.isActive) ? 'primary' : 'danger' }} {{ (subdomain.id == subdomain_id) ? 'active' : '' }} btn-block" data-url="{{ path('admin_game_get_form', {subdomain_id: subdomain.id, game_id: game_id}) }}">
+                        {{ subdomain.name }}
+                    </button>
+                </div>
+
+                {% set counter = counter + 1 %}
+            {% endfor %}
+        </div>
         <div class="row">
             <div class="col-md-6">
-                {% form_theme form 'form/fields.html.twig' %}
-                {{ form_start(form) }}
-                    {{ form_row(form.name) }}
-                    {{ form_row(form.description) }}
-                    {{ form_row(form.link) }}
-
-                    {% if form.categories.vars.choices is empty %}
-                        <p>There are no categories yet. <a href="{{ path('admin_add_category_view') }}">Add here</a></p>
-                    {% else %}
-                        {{ form_row(form.categories) }}
-                    {% endif %}
-
-                    {% if form.subdomain.vars.choices is empty %}
-                        <p>There are no subdomains yet. <a href="{{ path('admin_add_subdomain_view') }}">Add here</a></p>
-                    {% else %}
+                <div class="game-form">
+                    {% form_theme form 'form/fields.html.twig' %}
+                    {{ form_start(form) }}
+                        {{ form_row(form.name) }}
+                        {{ form_row(form.description) }}
+                        {{ form_row(form.link) }}
+                        {{ form_row(form.isActive) }}
+                        {{ form_row(form.category_contents) }}
                         {{ form_row(form.subdomain) }}
-                    {% endif %}
-
-                    {{ form_row(form._token) }}
-                    {{ form_row(form.save) }}
-                {{ form_end(form, {'render_rest': false}) }}
+                        {{ form_row(form.game) }}
+                        <button class="btn btn-primary update-game" data-url="{{ path('admin_game_save_form') }}">Update game</button>
+                    {{ form_end(form, {'render_rest': false}) }}
+                </div>
             </div>
         </div>
     </div>

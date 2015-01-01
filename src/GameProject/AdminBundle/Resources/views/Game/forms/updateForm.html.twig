@@ -1,0 +1,12 @@
+{% form_theme form 'form/fields.html.twig' %}
+{{ form_start(form) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.description) }}
+    {{ form_row(form.link) }}
+    {{ form_row(form.isActive) }}
+    {{ form_row(form.category_contents) }}
+    {{ form_row(form.subdomain) }}
+    {{ form_row(form.game) }}
+
+    <button class="btn btn-primary update-game" data-url="{{ path('admin_game_save_form') }}">Update game</button>
+{{ form_end(form, {'render_rest': false}) }}

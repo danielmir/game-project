@@ -8,27 +8,18 @@
     <div class="page-content">
         <div class="row">
             <div class="col-md-6">
+                {#{% form_theme form 'form/fields.html.twig' %}#}
+                {#{{ form_start(form) }}#}
+                    {#{{ form_row(form.name) }}#}
+                    {#{{ form_row(form.description) }}#}
+                    {#{{ form_row(form.link) }}#}
+                    {#{{ form_row(form.category_contents) }}#}
+
+                    {#{{ form_row(form.save) }}#}
+                    {#{{ form_row(form._token) }}#}
+                {#{{ form_end(form, {'render_rest': false}) }}#}
                 {% form_theme form 'form/fields.html.twig' %}
-                {{ form_start(form) }}
-                    {{ form_row(form.name) }}
-                    {{ form_row(form.description) }}
-                    {{ form_row(form.link) }}
-
-                {% if form.categories.vars.choices is empty %}
-                    <p>There are no categories yet. <a href="{{ path('admin_add_category_view') }}">Add here</a></p>
-                {% else %}
-                    {{ form_row(form.categories) }}
-                {% endif %}
-
-                {% if form.subdomain.vars.choices is empty %}
-                    <p>There are no subdomains yet. <a href="{{ path('admin_add_subdomain_view') }}">Add here</a></p>
-                {% else %}
-                    {{ form_row(form.subdomain) }}
-                {% endif %}
-
-                    {{ form_row(form.save) }}
-                    {{ form_row(form._token) }}
-                {{ form_end(form, {'render_rest': false}) }}
+                {{ form(form) }}
             </div>
         </div>
     </div>

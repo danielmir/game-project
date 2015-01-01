@@ -20,47 +20,15 @@
         <a href="{{ path('admin_add_category_view') }}" class="btn btn-primary">
             <span class="glyphicon glyphicon-plus"></span> Add category
         </a>
-        {% for flashMessage in app.session.flashbag.get('notice') %}
-            <div class="alert alert-success alert-static">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                {{ flashMessage }}
-            </div>
-        {% endfor %}
 
         {% for category in pagination %}
             <div class="game-block">
                 <div class="row">
                     <div class="col-sm-10">
-                        {# if subdomain is not empty and is turned off, make red color #}
-                        {% set subdomainHtml = (category.subdomain is not empty) ? (category.subdomain.isActive) ? '<small>'~category.subdomain.name~'</small>' : '<small style="color: red">'~category.subdomain.name~'</small>' : '' %}
-
-                        <h3>{{ category.name }} {{ subdomainHtml|raw }}</h3>
-                        {% if category.isActive == 0 %}
-                            <span class="off">Turned off</span>
-                        {% endif %}
+                        <h3>{{ category.displayName }}</h3>
                     </div>
                     <div class="col-sm-2">
-                        <div class="btn-group">
-                            <a href="{{ path('admin_update_category_view', {id: category.id}) }}" type="button" class="btn btn-primary">Edit</a>
-                            <a type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                <span class="caret"></span>
-                                <span class="sr-only">Toggle Dropdown</span>
-                            </a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ path('admin_delete_category', {id: category.id}) }}" class="dlt-btn">Delete</a></li>
-                                <li>
-                                    <a href="#" class="toggle-active" data-url="{{ path('admin_toggle_active_category', {id: category.id}) }}">
-                                        {% if category.isActive == 0 %}
-                                            Turn on
-                                        {% else %}
-                                            Turn off
-                                        {% endif %}
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
+                        <a href="{{ path('admin_update_category_view', {id: category.id}) }}" type="button" class="btn btn-primary btn-block">Edit</a>
                     </div>
                 </div>
             </div>

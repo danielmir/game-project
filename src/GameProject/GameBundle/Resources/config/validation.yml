@@ -9,7 +9,7 @@ GameProject\GameBundle\Entity\Game:
         link:
             - NotBlank: ~
 
-GameProject\GameBundle\Entity\Category:
-    properties:
-        name:
-            - NotBlank: ~
+#GameProject\GameBundle\Entity\Category:
+#    properties:
+#        name:
+#            - NotBlank: ~

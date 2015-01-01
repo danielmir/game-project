@@ -18,33 +18,23 @@ class Category
      */
     protected $id;
 
+    /**
+     * @ORM\Column(type="string", length=100, nullable=true)
+     */
+    protected $displayName;
 
     /**
-     * @ORM\ManyToOne(targetEntity="GameProject\AdminBundle\Entity\Subdomain", inversedBy="categories")
-     * @ORM\JoinColumn(name="subdomain_id", referencedColumnName="id")
+     * @ORM\OneToMany(targetEntity="CategoryContent", mappedBy="category")
      */
-    protected $subdomain;
+    protected $category_contents;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="Game", mappedBy="categories")
-     *
-     */
-    protected $games;
-
-    /**
-     * @ORM\Column(type="string", length=100)
-     */
-    protected $name;
-
-    /**
-     * @ORM\Column(name="is_active", type="boolean")
-     */
-    protected $isActive;
 
     public function __construct()
     {
-        $this->games = new ArrayCollection();
+        $this->category_contents = new ArrayCollection();
     }
+
+
 
     /**
      * Get id
@@ -57,104 +47,58 @@ class Category
     }
 
     /**
-     * Set name
+     * Set displayName
      *
-     * @param string $name
+     * @param string $displayName
      * @return Category
      */
-    public function setName($name)
+    public function setDisplayName($displayName)
     {
-        $this->name = $name;
+        $this->displayName = $displayName;
 
         return $this;
     }
 
     /**
-     * Get name
+     * Get displayName
      *
      * @return string 
      */
-    public function getName()
+    public function getDisplayName()
     {
-        return $this->name;
+        return $this->displayName;
     }
 
     /**
-     * Set isActive
+     * Add category_contents
      *
-     * @param boolean $isActive
+     * @param CategoryContent $categoryContents
      * @return Category
      */
-    public function setIsActive($isActive)
+    public function addCategoryContent(CategoryContent $categoryContents)
     {
-        $this->isActive = $isActive;
+        $this->category_contents[] = $categoryContents;
 
         return $this;
     }
 
     /**
-     * Get isActive
+     * Remove category_contents
      *
-     * @return boolean 
+     * @param CategoryContent $categoryContents
      */
-    public function getIsActive()
+    public function removeCategoryContent(CategoryContent $categoryContents)
     {
-        return $this->isActive;
+        $this->category_contents->removeElement($categoryContents);
     }
 
     /**
-     * Set subdomain
-     *
-     * @param \GameProject\AdminBundle\Entity\Subdomain $subdomain
-     * @return Category
-     */
-    public function setSubdomain(\GameProject\AdminBundle\Entity\Subdomain $subdomain = null)
-    {
-        $this->subdomain = $subdomain;
-
-        return $this;
-    }
-
-    /**
-     * Get subdomain
-     *
-     * @return \GameProject\AdminBundle\Entity\Subdomain
-     */
-    public function getSubdomain()
-    {
-        return $this->subdomain;
-    }
-
-    /**
-     * Add games
-     *
-     * @param \GameProject\GameBundle\Entity\Game $games
-     * @return Category
-     */
-    public function addGame(\GameProject\GameBundle\Entity\Game $games)
-    {
-        $this->games[] = $games;
-
-        return $this;
-    }
-
-    /**
-     * Remove games
-     *
-     * @param \GameProject\GameBundle\Entity\Game $games
-     */
-    public function removeGame(\GameProject\GameBundle\Entity\Game $games)
-    {
-        $this->games->removeElement($games);
-    }
-
-    /**
-     * Get games
+     * Get category_contents
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getGames()
+    public function getCategoryContents()
     {
-        return $this->games;
+        return $this->category_contents;
     }
 }

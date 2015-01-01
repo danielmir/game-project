@@ -1,5 +1,5 @@
 <?php
-// src/GameProject/AdminBundle/Entity/Category.php
+// src/GameProject/AdminBundle/Entity/Subdomain.php
 namespace GameProject\AdminBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -20,14 +20,14 @@ class Subdomain
     protected $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="GameProject\GameBundle\Entity\Category", mappedBy="subdomain")
-     */
-    protected $categories;
+     * @ORM\OneToMany(targetEntity="GameProject\GameBundle\Entity\CategoryContent", mappedBy="subdomain")
+     **/
+    protected $category_contents;
 
     /**
-     * @ORM\OneToMany(targetEntity="GameProject\GameBundle\Entity\Game", mappedBy="subdomain")
-     */
-    protected $games;
+     * @ORM\OneToMany(targetEntity="GameProject\GameBundle\Entity\GameContent", mappedBy="subdomain")
+     **/
+    protected $game_contents;
 
     /**
      * @ORM\Column(type="string", length=100)
@@ -46,10 +46,14 @@ class Subdomain
 
     public function __construct()
     {
-        $this->categories = new ArrayCollection();
-        $this->games = new ArrayCollection();
+        $this->category_contents = new ArrayCollection();
+        $this->game_content = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->name;
+    }
 
     /**
      * Get id
@@ -85,6 +89,29 @@ class Subdomain
     }
 
     /**
+     * Set abbreviation
+     *
+     * @param string $abbreviation
+     * @return Subdomain
+     */
+    public function setAbbreviation($abbreviation)
+    {
+        $this->abbreviation = $abbreviation;
+
+        return $this;
+    }
+
+    /**
+     * Get abbreviation
+     *
+     * @return string 
+     */
+    public function getAbbreviation()
+    {
+        return $this->abbreviation;
+    }
+
+    /**
      * Set isActive
      *
      * @param boolean $isActive
@@ -108,96 +135,78 @@ class Subdomain
     }
 
     /**
-     * Add categories
+     * Add category_contents
      *
-     * @param \GameProject\GameBundle\Entity\Category $categories
+     * @param \GameProject\GameBundle\Entity\CategoryContent $categoryContents
      * @return Subdomain
      */
-    public function addCategory(\GameProject\GameBundle\Entity\Category $categories)
+    public function addCategoryContent(\GameProject\GameBundle\Entity\CategoryContent $categoryContents)
     {
-        $this->categories[] = $categories;
+        $this->category_contents[] = $categoryContents;
 
         return $this;
     }
 
     /**
-     * Remove categories
+     * Remove category_contents
      *
-     * @param \GameProject\GameBundle\Entity\Category $categories
+     * @param \GameProject\GameBundle\Entity\CategoryContent $categoryContents
      */
-    public function removeCategory(\GameProject\GameBundle\Entity\Category $categories)
+    public function removeCategoryContent(\GameProject\GameBundle\Entity\CategoryContent $categoryContents)
     {
-        $this->categories->removeElement($categories);
+        $this->category_contents->removeElement($categoryContents);
     }
 
     /**
-     * Get categories
+     * Get category_contents
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getCategories()
+    public function getCategoryContents()
     {
-        return $this->categories;
+        return $this->category_contents;
     }
 
     /**
-     * Add games
+     * Add game_content
      *
-     * @param \GameProject\GameBundle\Entity\Game $games
+     * @param \GameProject\GameBundle\Entity\GameContent $gameContent
      * @return Subdomain
      */
-    public function addGame(\GameProject\GameBundle\Entity\Game $games)
+    public function addGameContent(\GameProject\GameBundle\Entity\GameContent $gameContent)
     {
-        $this->games[] = $games;
+        $this->game_content[] = $gameContent;
 
         return $this;
     }
 
     /**
-     * Remove games
+     * Remove game_content
      *
-     * @param \GameProject\GameBundle\Entity\Game $games
+     * @param \GameProject\GameBundle\Entity\GameContent $gameContent
      */
-    public function removeGame(\GameProject\GameBundle\Entity\Game $games)
+    public function removeGameContent(\GameProject\GameBundle\Entity\GameContent $gameContent)
     {
-        $this->games->removeElement($games);
+        $this->game_content->removeElement($gameContent);
     }
 
     /**
-     * Get games
+     * Get game_content
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getGames()
+    public function getGameContent()
     {
-        return $this->games;
+        return $this->game_content;
     }
 
     /**
-     * Set abbreviation
+     * Get game_contents
      *
-     * @param string $abbreviation
-     * @return Subdomain
+     * @return \Doctrine\Common\Collections\Collection 
      */
-    public function setAbbreviation($abbreviation)
+    public function getGameContents()
     {
-        $this->abbreviation = $abbreviation;
-
-        return $this;
-    }
-
-    /**
-     * Get abbreviation
-     *
-     * @return string 
-     */
-    public function getAbbreviation()
-    {
-        return $this->abbreviation;
-    }
-
-    public function __toString()
-    {
-        return $this->name;
+        return $this->game_contents;
     }
 }

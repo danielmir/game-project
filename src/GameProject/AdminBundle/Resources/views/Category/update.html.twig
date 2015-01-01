@@ -1,26 +1,45 @@
 {% set page = 'categories' %}
 {% extends 'GameProjectAdminBundle::layout.html.twig' %}
 
+{% block javascripts %}
+    <script src="{{ asset('js/category.js') }}"></script>
+{% endblock %}
+
 {% block mainBlock %}
     <div class="page-header">
         <h1>Update category</h1>
     </div>
     <div class="page-content">
+        <div class="alert alert-success info-block info-block-success"></div>
+        <div class="alert alert-danger info-block info-block-error"></div>
+        <div class="row translations">
+            {% set counter = 0 %}
+            {% for subdomain in subdomains %}
+            {# properly formatting bootstrap rows with columns #}
+            {{ ((counter % 4) == 0 and counter != 0) ? '</div><div class="row">' : '' }}
+
+            <div class="col-md-3">
+                <button class="category-subdomain btn btn-{{ (subdomain.isActive) ? 'primary' : 'danger' }} {{ (subdomain.id == subdomain_id) ? 'active' : '' }} btn-block" data-url="{{ path('admin_category_get_form', {subdomain_id: subdomain.id, category_id: category_id}) }}">
+                {{ subdomain.name }}
+                </button>
+            </div>
+
+            {% set counter = counter + 1 %}
+            {% endfor %}
+        </div>
         <div class="row">
             <div class="col-md-6">
+                <div class="category-form">
                 {% form_theme form 'form/fields.html.twig' %}
                 {{ form_start(form) }}
                     {{ form_row(form.name) }}
+                    {{ form_row(form.isActive) }}
+                    {{ form_row(form.subdomain) }}
+                    {{ form_row(form.category) }}
 
-                    {% if form.subdomain.vars.choices is empty %}
-                        <p>There are no subdomains yet. <a href="{{ path('admin_add_subdomain_view') }}">Add here</a></p>
-                    {% else %}
-                        {{ form_row(form.subdomain) }}
-                    {% endif %}
-
-                    {{ form_row(form.save) }}
-                    {{ form_row(form._token) }}
+                    <button class="btn btn-primary update-category" data-url="{{ path('admin_category_save_form') }}">Update category</button>
                 {{ form_end(form, {'render_rest': false}) }}
+                </div>
             </div>
         </div>
     </div>

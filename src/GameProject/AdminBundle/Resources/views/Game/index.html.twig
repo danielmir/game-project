@@ -20,68 +20,15 @@
         <a href="{{ path('admin_add_game_view') }}" class="btn btn-primary">
             <span class="glyphicon glyphicon-plus"></span> Add game
         </a>
-        {% for flashMessage in app.session.flashbag.get('notice') %}
-            <div class="alert alert-success alert-static">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                {{ flashMessage }}
-            </div>
-        {% endfor %}
 
         {% for game in pagination %}
             <div class="game-block">
                 <div class="row">
                     <div class="col-sm-10">
-                        {# if subdomain is absent for this game, show link without subdomain #}
-                        {% set linkHtml = (game.subdomain is not empty) ? (game.subdomain.isActive) ? '<small>'~game.linkDisplay~'</small>' : '<small style="color: red">'~game.linkDisplay~'</small>' : '<small>'~game.link~'</small>' %}
-
-                        <h3>{{ game.name }} {{ linkHtml|raw }}</small></h3>
-
-                        {% if game.isActive == 0 %}
-                            <span class="off">Turned off</span>
-                        {% endif %}
-
-                        <p class="categories">
-                            Categories :
-                            {% if game.categories is empty %}
-                                No categories yet
-                            {% else %}
-                                {% set catLength = game.categories|length %}
-                                {% set counter = 1 %}
-
-                                {% for cat in game.categories %}
-                                    {# logic for not showing comma after last item #}
-                                    {% set catHtml = (cat.isActive) ? cat.name : '<span style="color: red">'~cat.name~'</span>' %}
-                                    {{ catHtml|raw }}{{ (counter >= catLength) ? '' : ', '}}
-
-                                    {% set counter = counter + 1 %}
-                                {% endfor %}
-                            {% endif %}
-                        </p>
-
-                        <p>{{ game.description }}</p>
+                        <h3>{{ game.displayName }}</small></h3>
                     </div>
                     <div class="col-sm-2">
-                        <div class="btn-group">
-                            <a href="{{ path('admin_update_game_view', {id: game.id}) }}" type="button" class="btn btn-primary">Edit</a>
-                            <a type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                <span class="caret"></span>
-                                <span class="sr-only">Toggle Dropdown</span>
-                            </a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ path('admin_delete_game', {id: game.id}) }}" class="dlt-btn">Delete</a></li>
-                                <li>
-                                    <a href="#" class="toggle-active" data-url="{{ path('admin_toggle_active_game', {id: game.id}) }}">
-                                        {% if game.isActive == 0 %}
-                                            Turn on
-                                        {% else %}
-                                            Turn off
-                                        {% endif %}
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
+                        <a href="{{ path('admin_update_game_view', {id: game.id}) }}" type="button" class="btn btn-primary btn-block">Edit</a>
                     </div>
                 </div>
             </div>

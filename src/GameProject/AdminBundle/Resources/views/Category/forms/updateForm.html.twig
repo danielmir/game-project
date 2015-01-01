@@ -1,0 +1,9 @@
+{% form_theme form 'form/fields.html.twig' %}
+{{ form_start(form) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.isActive) }}
+    {{ form_row(form.subdomain) }}
+    {{ form_row(form.category) }}
+
+    <button class="btn btn-primary update-category" data-url="{{ path('admin_category_save_form') }}">Update category</button>
+{{ form_end(form, {'render_rest': false}) }}
